@@ -31,6 +31,16 @@ export default function App() {
     load();
   }
 
+  
+  async function shareNote(id) {
+    const res = await fetch(`${import.meta.env.VITE_API_BASE}/${id}/share`, {
+      method: 'POST',
+    });
+    if (res.ok) {
+      load(); 
+    }
+  }
+
   return (
     <div className="container">
       <h1>Notes App</h1>
@@ -52,14 +62,15 @@ export default function App() {
               onChange={(e) => editNote(n.id, e.target.value)}
             />
             <button onClick={() => removeNote(n.id)}>Delete</button>
+            <button onClick={() => shareNote(n.id)}>Share</button>
 
             {n.slug && (
               <a
-                href={`${import.meta.env.VITE_API_BASE}/${n.slug}`}
+                href={`${import.meta.env.VITE_API_BASE}/public/${n.slug}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Share
+                View Shared Note
               </a>
             )}
           </li>

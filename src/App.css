@@ -1,4 +1,4 @@
-/* General body styling */
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background: linear-gradient(to right, #f8f8f8, #e0eafc);
@@ -6,7 +6,7 @@ body {
   margin: 0;
 }
 
-/* Center container */
+
 .container {
   max-width: 600px;
   margin: auto;
@@ -21,14 +21,14 @@ body {
   transform: translateY(-3px);
 }
 
-/* Title */
+
 h1 {
   text-align: center;
   color: #333;
   margin-bottom: 25px;
 }
 
-/* Input and Add button */
+
 input {
   padding: 10px;
   margin-right: 10px;
@@ -59,7 +59,7 @@ button:hover {
   transform: translateY(-2px);
 }
 
-/* Notes list */
+
 ul {
   list-style: none;
   padding: 0;
@@ -93,7 +93,7 @@ li input:focus {
   outline: none;
 }
 
-/* Share link styling */
+
 a {
   color: #4a90e2;
   margin-left: 10px;
@@ -105,7 +105,7 @@ a:hover {
   text-decoration: underline;
 }
 
-/* Delete button */
+
 li button {
   background-color: #e94e4e;
   margin-left: 10px;
@@ -115,7 +115,7 @@ li button:hover {
   background-color: #c43d3d;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 640px) {
   input {
     width: 100%;

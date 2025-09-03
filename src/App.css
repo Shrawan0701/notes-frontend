@@ -1,0 +1,139 @@
+/* General body styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #f8f8f8, #e0eafc);
+  padding: 20px;
+  margin: 0;
+}
+
+/* Center container */
+.container {
+  max-width: 600px;
+  margin: auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  padding: 30px;
+  transition: transform 0.2s ease;
+}
+
+.container:hover {
+  transform: translateY(-3px);
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+}
+
+/* Input and Add button */
+input {
+  padding: 10px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: calc(100% - 100px);
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+  outline: none;
+}
+
+button {
+  padding: 10px 15px;
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #357ab8;
+  transform: translateY(-2px);
+}
+
+/* Notes list */
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f4f6fb;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+li:hover {
+  background: #e2e8f0;
+  transform: translateY(-2px);
+}
+
+li input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 16px;
+}
+
+li input:focus {
+  outline: none;
+}
+
+/* Share link styling */
+a {
+  color: #4a90e2;
+  margin-left: 10px;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Delete button */
+li button {
+  background-color: #e94e4e;
+  margin-left: 10px;
+}
+
+li button:hover {
+  background-color: #c43d3d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  button {
+    width: 100%;
+  }
+
+  li {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  li button,
+  li a {
+    margin-top: 8px;
+    margin-left: 0;
+  }
+}

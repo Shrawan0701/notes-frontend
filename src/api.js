@@ -1,39 +1,76 @@
-const API_BASE = import.meta.env.VITE_API_BASE;
+import React, { useEffect, useState } from "react";
+import { getNotes, createNote, updateNote, deleteNote, shareNote } from "./api";
 
-export async function getNotes() {
-  const res = await fetch(API_BASE);
-  if (!res.ok) throw new Error("Failed to fetch notes");
-  return res.json();
-}
+export default function App() {
+  const [notes, setNotes] = useState([]);
+  const [text, setText] = useState("");
 
-export async function createNote(note) {
-  const res = await fetch(API_BASE, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(note),
-  });
-  if (!res.ok) throw new Error("Failed to create note");
-  return res.json();
-}
+  useEffect(() => {
+    load();
+  }, []);
 
-export async function updateNote(id, note) {
-  const res = await fetch(`${API_BASE}/${id}`, {
-    method: "PUT",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(note),
-  });
-  if (!res.ok) throw new Error("Failed to update note");
-  return res.json();
-}
+  async function load() {
+    const data = await getNotes();
+    setNotes(data);
+  }
 
-export async function deleteNote(id) {
-  const res = await fetch(`${API_BASE}/${id}`, { method: "DELETE" });
-  if (!res.ok) throw new Error("Failed to delete note");
-}
+  async function addNote() {
+    if (!text.trim()) return;
+    await createNote({ content: text });
+    setText("");
+    load();
+  }
 
+  async function editNote(id, newContent) {
+    await updateNote(id, { content: newContent });
+    load();
+  }
 
-export async function shareNote(id) {
-  const res = await fetch(`${API_BASE}/${id}/share`, { method: "POST" });
-  if (!res.ok) throw new Error("Failed to share note");
-  return res.json();
+  async function removeNote(id) {
+    await deleteNote(id);
+    load();
+  }
+
+  async function handleShare(id) {
+    await shareNote(id);
+    load();
+  }
+
+  return (
+    <div className="container">
+      <h1>Notes App</h1>
+
+      <div>
+        <input
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Write a note..."
+        />
+        <button onClick={addNote}>Add</button>
+      </div>
+
+      <ul>
+        {notes.map((n) => (
+          <li key={n.id}>
+            <input
+              value={n.content}
+              onChange={(e) => editNote(n.id, e.target.value)}
+            />
+            <button onClick={() => removeNote(n.id)}>Delete</button>
+            <button onClick={() => handleShare(n.id)}>Share</button>
+
+            {n.slug && (
+              <a
+                href={`${import.meta.env.VITE_API_BASE}/public/${n.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                View Shared Note
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }

@@ -1,4 +1,3 @@
-
 const API_BASE = import.meta.env.VITE_API_BASE;
 
 export async function getNotes() {
@@ -9,8 +8,8 @@ export async function getNotes() {
 
 export async function createNote(note) {
   const res = await fetch(API_BASE, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(note),
   });
   if (!res.ok) throw new Error("Failed to create note");
@@ -19,8 +18,8 @@ export async function createNote(note) {
 
 export async function updateNote(id, note) {
   const res = await fetch(`${API_BASE}/${id}`, {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
     body: JSON.stringify(note),
   });
   if (!res.ok) throw new Error("Failed to update note");
@@ -28,6 +27,13 @@ export async function updateNote(id, note) {
 }
 
 export async function deleteNote(id) {
-  const res = await fetch(`${API_BASE}/${id}`, { method: 'DELETE' });
+  const res = await fetch(`${API_BASE}/${id}`, { method: "DELETE" });
   if (!res.ok) throw new Error("Failed to delete note");
+}
+
+
+export async function shareNote(id) {
+  const res = await fetch(`${API_BASE}/${id}/share`, { method: "POST" });
+  if (!res.ok) throw new Error("Failed to share note");
+  return res.json();
 }
